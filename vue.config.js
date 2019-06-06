@@ -1,7 +1,7 @@
 const path = require('path')
 const resolve = dir => path.join(__dirname, dir)
 module.exports = {
-  publicPath: 'element-table-demo/',
+  publicPath: '/',
   outputDir: 'dist',
   assetsDir: 'assets',
   lintOnSave: true,

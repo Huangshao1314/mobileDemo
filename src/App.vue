@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <hello-world></hello-world>
+    <editable></editable>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+// import HelloWorld from './components/HelloWorld.vue'
+import editable from './components/editable'
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    editable
   }
 }
 </script>

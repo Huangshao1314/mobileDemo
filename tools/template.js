@@ -24,7 +24,7 @@ export default {
   </div>
 </template>
 <script>
-import ViewMixin from '@/mixins/view-mixin.js
+import ViewMixin from '@/mixins/view-mixins.js'
 export default {
   name: '${componentName}',
   mixins: [

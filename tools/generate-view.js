@@ -52,7 +52,7 @@ let componentName = ''
 process.stdin.on('data', async chunk => {
   const inputName = String(chunk).trim().toString()
 
-  const componentDirectory = resolveDir('../src/components', inputName)
+  const componentDirectory = resolveDir('../src/views', inputName)
 
   const componentVueName = resolveDir(componentDirectory, 'index.vue')
 

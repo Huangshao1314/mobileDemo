@@ -1,0 +1,11 @@
+// 这个配置文件需要配合vs code的path autocomplete插件的使用
+{
+  "compilerOptions": {
+    "target": "esnext", // define to your liking
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
