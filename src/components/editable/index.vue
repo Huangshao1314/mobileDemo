@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { fetchList } from '@/api/article'
+// import { fetchList } from '@/api/article'
 import ViewMixin from '@/mixins/view-mixins.js'
 export default {
   name: 'editable',
@@ -88,15 +88,15 @@ export default {
   methods: {
     getList() {
       this.listLoading = true
-      fetchList(this.listQuery).then(response => {
-        const items = response.data.items
-        this.list = items.map(v => {
-          this.$set(v, 'edit', false) // https://vuejs.org/v2/guide/reactivity.html
-          v.originalTitle = v.title //  will be used when user click the cancel botton
-          return v
-        })
-        this.listLoading = false
-      })
+      // fetchList(this.listQuery).then(response => {
+      //   const items = response.data.items
+      //   this.list = items.map(v => {
+      //     this.$set(v, 'edit', false) // https://vuejs.org/v2/guide/reactivity.html
+      //     v.originalTitle = v.title //  will be used when user click the cancel botton
+      //     return v
+      //   })
+      //   this.listLoading = false
+      // })
     },
     cancelEdit(row) {
       row.title = row.originalTitle
