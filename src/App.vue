@@ -1,16 +1,13 @@
 <template>
   <div id="app">
-    <editable></editable>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-import editable from './components/editable'
 export default {
   name: 'app',
   components: {
-    editable
   }
 }
 </script>

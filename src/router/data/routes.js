@@ -17,6 +17,15 @@ const routes = [
       requireAuth: false,
       title: 'drag-column'
     }
+  },
+  {
+    path: '/test-demo',
+    component: () => import('@/views/test-demo'),
+    name: "TestDemo",
+    meta: {
+      requireAuth: false,
+      title: 'TestDemo'
+    }
   }
 ]
 

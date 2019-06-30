@@ -24,7 +24,7 @@ router.beforeEach((to, from, next) => {
 router.afterEach(route => {
   const DEFAULT_TITLE = 'vue-demo'
   if (route.meta && route.meta.title) {
-    document.title = route.mete.title
+    document.title = route.meta.title
   } else {
     document.title = DEFAULT_TITLE
   }

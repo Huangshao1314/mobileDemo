@@ -87,7 +87,7 @@ export default {
   },
   methods: {
     getList() {
-      this.listLoading = true
+      this.listLoading = false
       // fetchList(this.listQuery).then(response => {
       //   const items = response.data.items
       //   this.list = items.map(v => {
