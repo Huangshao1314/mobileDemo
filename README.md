@@ -1,4 +1,4 @@
-# element-table-demo
+# element-demo
 
 ## Project setup
 ```
