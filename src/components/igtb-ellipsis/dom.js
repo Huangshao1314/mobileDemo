@@ -1,5 +1,5 @@
 /* istanbul ignore next */
-
+/*eslint-disable*/
 import Vue from 'vue';
 
 const isServer = Vue.prototype.$isServer;

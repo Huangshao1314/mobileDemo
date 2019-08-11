@@ -109,7 +109,7 @@ module.exports = {
     "no-undef-init": 2,//变量初始化时不能直接给它赋值为undefined
     "no-undefined": 0,//不能使用undefined
     "no-unexpected-multiline": 2,//避免多行表达式
-    "no-underscore-dangle": 1,//标识符不能以_开头或结尾
+    "no-underscore-dangle": 0,//标识符不能以_开头或结尾
     "no-unneeded-ternary": 0,//禁止不必要的嵌套 var isYes = answer === 1 ? true : false;
     "no-unreachable": 2,//不能有无法执行的代码
     "no-unused-expressions": 0,//禁止无用的表达式
@@ -190,7 +190,7 @@ module.exports = {
     "use-isnan": 2,//禁止比较时使用NaN，只能用isNaN()
     "valid-jsdoc": 0,//jsdoc规则
     "valid-typeof": 2,//必须使用合法的typeof的值
-    "vars-on-top": 2,//var必须放在作用域顶部
+    "vars-on-top": 0,//var必须放在作用域顶部
     "wrap-iife": [2, "inside"],//立即执行函数表达式的小括号风格
     "wrap-regex": 0,//正则表达式字面量用小括号包起来
     "yoda": [2, "never"]//禁止尤达条件

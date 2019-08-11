@@ -26,7 +26,15 @@ module.exports = {
       .tap(options => {
         Object.assign(options, {limit: 10240})
       }) // 10kb
-      // 设置svg-sprite,新增svg-sprite处理svg图标
+
+    // 设置svg-sprite,在svg规则中排除svg图标
+    config.module
+      .rule('svg')
+      .exclude
+      .add(resolve('src/components/svg-icon'))
+      .end()
+
+    // 设置svg-sprite,新增svg-sprite处理svg图标
     config.module
       .rule('svg-sprite')
       .test(/\.svg$/)

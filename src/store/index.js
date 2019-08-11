@@ -4,6 +4,7 @@ import createPersistedState from 'vuex-persistedstate'
 import * as Cookies from 'js-cookie'
 
 import hello from './modules/hello'
+import app from './modules/app'
 
 Vue.use(Vuex)
 
@@ -24,7 +25,7 @@ let getStorageType = function() {
 }
 
 export default new Vuex.Store({
-  modules: {hello},
+  modules: {hello, app},
   strict: process.env.NODE_ENV !== 'production',
   plugins: [
     createPersistedState(

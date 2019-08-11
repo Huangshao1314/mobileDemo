@@ -1,0 +1,39 @@
+'use strict'
+module.exports={
+  types:[
+    {
+      value:'新功能',
+      name:'新增功能'
+    },
+    {
+      value:'修改功能',
+      name:'修改功能'
+    },
+    {
+      value:'删除功能',
+      name:'删除功能'
+    },
+    {
+      value:'bug 修复',
+      name:'bug 修复'
+    },
+    {
+      value:'文档或工具改动',
+      name:'文档或工具改动'
+    },
+    {
+      value:'格式化',
+      name:'格式化'
+    },
+    {
+      value:'重构',
+      name:'重构'
+    },
+    {
+      value:'测试代码',
+      name:'测试代码'
+    }
+  ],
+  scopes:[],
+  allowCustomScopes:true
+}

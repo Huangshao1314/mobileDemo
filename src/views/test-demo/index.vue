@@ -1,42 +1,50 @@
 <template>
   <div class="test-demo">
-    <igtb-ellipsis  style="margin-top:20px">
-      使用content属性来决定hover时的提示信息。由placement属性决定展示效果：placement属性值为：方向-对齐位置；
-      四个方向：top、left、right、bottom。
-    </igtb-ellipsis>
-    <igtb-ellipsis content="北京市普陀区金沙江路 1517 弄" style="margin-top:20px">
-    </igtb-ellipsis>
-    <igtb-ellipsis style="margin-top:20px" popper-class="tipClass">
-      <span>
-      使用content属性来决定hover时的提示信息。由placement属性决定展示效果：placement属性值为：方向-对齐位置；
-      四个方向：top、left、right、bottom。
-      </span>
-    </igtb-ellipsis>
-    <igtb-ellipsis  style="margin-top:20px" class="red">
-      <div>
-      使用content属性来决定hover时的提示信息。由placement属性决定展示效果：placement属性值为：方向-对齐位置；
-      四个方向：top、left、right、bottom。
-      </div>
-    </igtb-ellipsis>
+    <div id="flip-list-demo" class="demo">
+  <button v-on:click="shuffle">Shuffle</button>
+  <ul>
+  <transition-group name="flip-list">
+    <li v-for="item in items" v-bind:key="item.id" v-show="item.show">
+      {{ item.id }}
+    </li>
+  </transition-group>
+  </ul>
+</div>
   </div>
 </template>
 <script>
 import ViewMixin from '@/mixins/view-mixins.js'
-import IgtbEllipsis from '@/components/igtb-ellipsis'
+// import shuffle from 'lodash/shuffle'
 export default {
   name: 'TestDemo',
   mixins: [
     ViewMixin()
   ],
   components: {
-    IgtbEllipsis
   },
-  data() {
+  data: function() {
     return {
-      width: 50
-    }
+      items: [{
+        id: "1",
+        show: true
+      }, {
+        id: "2",
+        show: false
+      }, {
+        id: "3",
+        show: true
+      }, {
+        id: "4",
+        show: false
+      }]
+    };
   },
   methods: {
+    shuffle: function() {
+      this.items.map((item) => {
+        item.show = !item.show
+      })
+    }
   }
 }
 </script>
@@ -51,6 +59,9 @@ export default {
 <style lang="postcss">
 .tipClass{
   color: red !important;
+}
+.flip-list-move {
+  transition: transform 1s;
 }
 </style>
 

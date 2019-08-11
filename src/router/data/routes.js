@@ -1,5 +1,5 @@
 import DragColumn from '@/views/drag-column'
-
+import Layout from '@/views/layout'
 /**
  * hidden:false   是否在菜单中显示
  * meta: {
@@ -26,6 +26,32 @@ const routes = [
       requireAuth: false,
       title: 'TestDemo'
     }
+  },
+  {
+    path: '/tran-group',
+    component: () => import('@/views/tran-group'),
+    name: "TranGroup",
+    meta: {
+      requireAuth: false,
+      title: 'tran-group'
+    }
+  },
+  {
+    path: '/',
+    redirect: '/home',
+    component: Layout,
+    children: [
+      {
+        path: 'home',
+        name: 'home',
+        meta: {
+          requireAuth: false,
+          title: 'home',
+          noCache: true
+        },
+        component: () => import('@/views/home')
+      }
+    ]
   }
 ]
 
