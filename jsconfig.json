@@ -2,7 +2,7 @@
 {
   "compilerOptions": {
     "target": "esnext", // define to your liking
-    "baseUrl": "./",
+    "baseUrl": "element-demo/",
     "paths": {
       "@/*": ["src/*"]
     }
