@@ -37,6 +37,15 @@ const routes = [
     }
   },
   {
+    path: '/reponse-demo',
+    component: () => import('@/views/reponse-demo'),
+    name: "ReponseDemo",
+    meta: {
+      requireAuth: false,
+      title: 'ReponseDemo'
+    }
+  },
+  {
     path: '/',
     redirect: '/home',
     component: Layout,
