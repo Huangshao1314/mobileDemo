@@ -83,13 +83,13 @@ module.exports = {
     "no-obj-calls": 2,//不能调用内置的全局对象，比如Math() JSON()
     "no-octal": 2,//禁止使用八进制数字
     "no-octal-escape": 2,//禁止使用八进制转义序列
-    "no-param-reassign": 2,//禁止给参数重新赋值
+    "no-param-reassign": 0,//禁止给参数重新赋值
     "no-path-concat": 0,//node中不能使用__dirname或__filename做路径拼接
     "no-plusplus": 0,//禁止使用++，--
     "no-process-env": 0,//禁止使用process.env
     "no-process-exit": 0,//禁止使用process.exit()
     "no-proto": 2,//禁止使用__proto__属性
-    "no-redeclare": 2,//禁止重复声明变量
+    "no-redeclare": 0,//禁止重复声明变量
     "no-regex-spaces": 2,//禁止在正则表达式字面量中使用多个空格 /foo bar/
     "no-restricted-modules": 0,//如果禁用了指定模块，使用就会报错
     "no-return-assign": 1,//return 语句中不能有赋值表达式
@@ -120,7 +120,6 @@ module.exports = {
     "no-var": 0,//禁用var，用let和const代替
     "no-warning-comments": [1, { "terms": ["todo", "fixme", "xxx"], "location": "start" }],//不能有警告备注
     "no-with": 2,//禁用with
-
     "array-bracket-spacing": [2, "never"],//是否允许非空数组里面有多余的空格
     "arrow-parens": 0,//箭头函数用小括号括起来
     "arrow-spacing": [2,{'before':true,'after':true}],//=>的前/后括号
@@ -142,7 +141,7 @@ module.exports = {
     "dot-location": 0,//对象访问符的位置，换行的时候在行首还是行尾
     "dot-notation": [0, { "allowKeywords": true }],//避免不必要的方括号
     "eol-last": 0,//文件以单一的换行符结束
-    "eqeqeq": 2,//必须使用全等
+    "eqeqeq": 0,//必须使用全等
     "func-names": 0,//函数表达式必须有名字
     "func-style": [0, "declaration"],//函数风格，规定只能使用函数声明/函数表达式
     "generator-star-spacing":  [2,{'before': true, "after":false}],//生成器函数*的前后空格
