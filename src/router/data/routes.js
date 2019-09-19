@@ -46,6 +46,15 @@ const routes = [
     }
   },
   {
+    path: '/scroll-demo',
+    component: () => import('@/views/scroll-demo'),
+    name: "ScrollDemo",
+    meta: {
+      requireAuth: false,
+      title: 'ScrollDemo'
+    }
+  },
+  {
     path: '/',
     redirect: '/home',
     component: Layout,

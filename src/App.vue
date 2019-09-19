@@ -20,4 +20,9 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+body {
+  min-width: 980px;
+  min-height: 1000px;
+  overflow: scroll;
+}
 </style>
