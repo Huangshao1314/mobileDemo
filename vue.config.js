@@ -73,6 +73,13 @@ module.exports = {
     https: false,
     open: false,
     proxy: {
+      // [
+      //   ['/'+process.env.VUE_APP_MC_NAME]:{
+      //     target: '<url>',
+      //     ws: true,
+      //     changeOrigin: true
+      //   }
+      // ]
       '/api': {
         target: '<url>',
         ws: true,

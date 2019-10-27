@@ -19,6 +19,7 @@ const eleConfig = {
   reqInterceptors: (config) => {
     var local = store.state.app.language
     var method = config.url
+    console.log('method: ' + method + ' ,request:', config.data)
     config.url = '/' + process.env.VUE_APP_BACKEND_NAME + '/_ajax.do'
     let jsonHeader = {
       agent: 'ELEWEB',
@@ -61,6 +62,7 @@ const eleConfig = {
   },
   resInterceptors: (res) => {
     if (res.status === 200) {
+      console.log('method: ' + res.config.params.method + ' ,response:', res.data)
       // 此处需要处理报错的行为
       if (CU.getErr(res) && (CU.getErr(res).code === 'validation.session_invalid')) {
         // session超时或者用户被踢时，登出

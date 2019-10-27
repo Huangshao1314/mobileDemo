@@ -55,6 +55,15 @@ const routes = [
     }
   },
   {
+    path: '/example',
+    component: () => import('@/components/igtb-ellipsis/example'),
+    name: "example",
+    meta: {
+      requireAuth: false,
+      title: 'example'
+    }
+  },
+  {
     path: '/',
     redirect: '/home',
     component: Layout,

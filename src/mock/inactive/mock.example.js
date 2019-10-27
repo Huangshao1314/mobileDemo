@@ -4,12 +4,12 @@ export const example = [{
   data: {
     result: {
       testStr: 'example'
+    },
+    _exception: false,
+    header: {
+      'language': 'zh-cn',
+      'device': 'tttt'
     }
-  },
-  _exception: false,
-  header: {
-    'language': 'zh-cn',
-    'device': 'tttt'
   }
 }]
 

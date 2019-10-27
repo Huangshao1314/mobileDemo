@@ -66,6 +66,16 @@ export default {
     }
   },
   mounted() {
+    this.$ele.post("login", {'name': 'test'}).then(res => {
+      if (this.$CU.isSuccess(res)) {
+        let temp = this.$CU.getResData(res)
+        console.log(temp)
+      } else {
+        this.$alert(this.getErr(res).message)
+      }
+    }).catch(err => {
+      err;
+    })
     // 自动生成svg组件图标和库
     const mockContext = require.context('../../components/svg-icon/svgs', true, /.svg$/)
     mockContext.keys().forEach(filepath => {

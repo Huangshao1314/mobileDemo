@@ -5,11 +5,11 @@ export const login = [{
     result: {
       userName: 'login',
       userId: 'test111'
+    },
+    header: {
+      'language': 'zh-cn',
+      'device': 'tttt'
     }
-  },
-  header: {
-    'language': 'zh-cn',
-    'device': 'tttt'
   }
 }]
 
