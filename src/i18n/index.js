@@ -11,7 +11,7 @@ import viewZH from './zh-CN/view'
 import viewEN from './en-US/view'
 
 import elementUIen from 'element-ui/lib/locale/lang/en'
-import elementUIzh from 'element-ui/lib/locale/lang/zh-CH'
+import elementUIzh from 'element-ui/lib/locale/lang/zh-CN'
 
 Vue.use(VueI18n)
 

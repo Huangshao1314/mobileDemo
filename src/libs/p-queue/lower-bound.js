@@ -18,3 +18,4 @@ function lowerBound(array, value, comparator) {
   return first;
 }
 exports.default = lowerBound;
+// # sourceMappingURL=lower-bound.js.map

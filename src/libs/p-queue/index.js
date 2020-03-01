@@ -134,7 +134,7 @@ var timeoutError = new p_timeout_1.default.TimeoutError();
 /**
  * Promise queue with concurrency control.
  */
-var PQueue = /** @class */ function(_super) {
+var PQueue = /** @class */ (function(_super) {
   __extends(PQueue, _super);
   function PQueue(options) {
     var _this = _super.call(this) || this;
@@ -240,6 +240,214 @@ var PQueue = /** @class */ function(_super) {
     return false;
   };
   PQueue.prototype._initializeIntervalIfNeeded = function() {
-
+    var _this = this;
+    if (this._isIntervalIgnored || this._intervalId !== undefined) {
+      return;
+    }
+    this._intervalId = setInterval(function() {
+      _this._onInterval();
+    }, this._interval)
+    this._intervalEnd = Date.now() + this._interval;
+  };
+  PQueue.prototype._onInterval = function() {
+    if (this._intervalCount === 0 && this._pendingCount === 0 && this._intervalId) {
+      clearInterval(this._intervalId)
+      this._intervalId = undefined
+    }
+    this._intervalCount = this._carryoverConcurrencyCount ? this._pendingCount : 0
+    this._proceeQueue()
+  };
+  /**
+   * Executes all queued functions until it reaches the limit.
+   */
+  PQueue.prototype._proceeQueue = function() {
+    // eslint-disable-next-line no-empty
+    while (this._tryToStartAnother()) {}
+  };
+  Object.defineProperty(PQueue.prototype, "concurrency", {
+    get: function() {
+      return this._concurrency;
+    },
+    set: function(newConcurrency) {
+      if (!(typeof newConcurrency === 'number' && newConcurrency >= 1)) {
+        throw new TypeError("Expected `concurrency` to be a number from 1 and up, got`" + newConcurrency + "` (" + typeof newConcurrency + ")")
+      }
+      this._concurrency = newConcurrency
+      this._proceeQueue();
+    },
+    enumerable: true,
+    configurable: true
+  });
+  /**
+   * Adds a sync or async task to the queue. Always return a promise.
+   */
+  PQueue.prototype.add = function(fn, options) {
+    if (options === void 0) {
+      options = {}
+    }
+    return __awaiter(this, void 0, void 0, function() {
+      var _this = this;
+      return __generator(this, function(_a) {
+        return [2 /* return */, new Promise(function(resolve, reject) {
+          var run = function() {
+            return __awaiter(_this, void 0, void 0, function() {
+              var operation, _a, error_1;
+              var _this = this
+              return __generator(this, function(_b) {
+                switch (_b.label) {
+                case 0:
+                  this._pendingCount++;
+                  this._intervalCount++;
+                  _b.label = 1;
+                case 1:
+                  _b.trys.push([1, 3, , 4]);
+                  operation = (this._timeout === undefined && options.timeout === undefined) ? fn() : p_timeout_1.default(Promise.resolve(fn()), (options.timeout === undefined ? this._timeout : options.timeout), function() {
+                    if (options.throwOnTimeout === undefined ? _this._throwOnTimeout : options.throwOnTimeout) {
+                      reject(timeoutError)
+                    }
+                    return undefined
+                  })
+                  _a = resolve
+                  return [4 /* yield */, operation]
+                case 2:
+                  _a.apply(void 0, [_b.sent()])
+                  return [3 /* break */, 4]
+                case 3:
+                  error_1 = _b.sent()
+                  reject(error_1)
+                  return [3 /* break */, 4]
+                case 4:
+                  this._next()
+                  return [2]
+                }
+              })
+            })
+          }
+          _this._queue.enqueue(run, options)
+          _this._tryToStartAnother();
+        })]
+      })
+    })
   }
-};
+  /**
+   * Same as `.add()`, but accepts an array of sync or async functions.
+   * @returns A promise that resolves when all functions are resolved.
+   */
+  PQueue.prototype.addAll = function(functions, options) {
+    return __awaiter(this, void 0, void 0, function() {
+      var _this = this
+      return __generator(this, function(_a) {
+        return [2 /* return */, Promise.all(functions.map(function(function_) {
+          return __awaiter(_this, void 0, void 0, function() {
+            return __generator(this, function(_a) {
+              return [2 /* return */, this.add(function_, options)];
+            })
+          })
+        }))]
+      })
+    })
+  }
+  /**
+   * Start (or resume) executing enqueued tasks within concurrency limit. No need to call this if queue is not paused (via `options.autoStart = false` or by `.pause()` method.)
+   */
+  PQueue.prototype.start = function() {
+    if (!this._isPaused) {
+      return this
+    }
+    this._isPaused = false
+    this._proceeQueue()
+    return this
+  }
+  /**
+   * Put queue execution on hold.
+   */
+  PQueue.prototype.pause = function() {
+    this._isPaused = true
+  }
+  /**
+   * Clear the queue
+   */
+  PQueue.prototype.clear = function() {
+    this._queue = new this._queueClass()
+  }
+  /**
+   * Can be called multiple times. Useful if you for example add additional items at a later time.
+   * @return A Promise that settles when the queue becomes empty.
+   */
+  PQueue.prototype.onEmpty = function() {
+    return __awaiter(this, void 0, void 0, function() {
+      var _this = this
+      return __generator(this, function(_a) {
+        // Instantly resolve if the queue is empty
+        if (this._queue.size === 0) {
+          return [2]
+        }
+        return [2 /* return */, new Promise(function(resolve) {
+          var existingResolve = _this._resolveEmpty;
+          _this._resolveEmpty = function() {
+            existingResolve()
+            resolve()
+          }
+        })]
+      })
+    })
+  }
+  /**
+   * The difference with `.onEmpty` is that `.onIdle` guarantees that all work from the queue has finished. `.onEmpty` merely signals that the queue is empty, but it could mean that some promise haven't completed yet.
+   * @returns A promise that settles when the queue becomes empty, and all promise have completed; `queue.size === 0 && queue.pending === 0`.
+   */
+  PQueue.prototype.onIdle = function() {
+    return __awaiter(this, void 0, void 0, function() {
+      var _this = this
+      return __generator(this, function(_a) {
+        // Instantly resolve if none pending and if nothing else is queued
+        if (this._pendingCount === 0 && this._queue.size === 0) {
+          return [2]
+        }
+        return [2 /* return */, new Promise(function(resolve) {
+          var existingResolve = _this._resolveIdle;
+          _this._resolveIdle = function() {
+            existingResolve()
+            resolve()
+          }
+        })]
+      })
+    })
+  }
+  Object.defineProperty(PQueue.prototype, "size", {
+    /**
+     * Size of the queue
+     */
+    get: function() {
+      return this._queue.size
+    },
+    enumerable: true,
+    configurable: true
+  })
+  Object.defineProperty(PQueue.prototype, "isPaused", {
+    /**
+     * Whether the queue is currently paused.
+     */
+    get: function() {
+      return this._isPaused
+    },
+    enumerable: true,
+    configurable: true
+  })
+  Object.defineProperty(PQueue.prototype, "timeout", {
+    get: function() {
+      return this._timeout
+    },
+    /**
+     * Set the timeout for future operations.
+     */
+    set: function(milliseconds) {
+      this._timeout = milliseconds
+    },
+    enumerable: true,
+    configurable: true
+  })
+  return PQueue
+})(EventEmitter);
+exports.default = PQueue
+// # sourceMappingURL=index.js.map
