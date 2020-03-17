@@ -1,6 +1,6 @@
 import config from './http.default.config'
 import eleConfig from './http.ele.config'
-// import PQueue from 'p-queue'
+import PQueue from '@/libs/p-queue'
 /**
  * Install plugin
  * @param Vue
@@ -22,14 +22,17 @@ vueHttp.install = (Vue, axios) => {
   let eleInstance = axios.create()
 
   vueHttp._settings(eleInstance, eleConfig)
-  // let pqueue = new PQueue({concurrency: 6, autoStart: true})
-  // let limitedEleInstance = {
-  //   post(method, params, options, queueOptions) {
-  //     return pqueue.add(() => {
-  //       return eleInstance.post(method, params, options)
-  //     }, queueOptions)
-  //   }
-  // }
+  let pqueue = new PQueue({concurrency: 6, autoStart: true})
+  let limitedEleInstance = {
+    post(method, params, options, queueOptions) {
+      return pqueue.add(() => {
+        return eleInstance.post(method, params, options)
+      }, queueOptions)
+    },
+    getQueue() {
+      return pqueue
+    }
+  }
 
   Object.defineProperties(Vue.prototype, {
     axios: {
@@ -48,13 +51,13 @@ vueHttp.install = (Vue, axios) => {
       get() {
         return eleInstance
       }
-    }
+    },
 
-    // $eleLimit: {
-    //   get() {
-    //     return limitedEleInstance
-    //   }
-    // }
+    $eleLimit: {
+      get() {
+        return limitedEleInstance
+      }
+    }
   })
 }
 

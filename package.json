@@ -8,7 +8,20 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "new:comp": "node ./tools/generate-component",
-    "new:view": "node ./tools/generate-view"
+    "new:view": "node ./tools/generate-view",
+    "test:unit": "vue-cli-service test:unit",
+    "test:e2e": "vue-cli-service test:e2e -- mode development --headless",
+    "deploy": "sh deploy.sh",
+    "analyz": "vue-cli-service build --mode analyz",
+    "build:development": "vue-cli-service build --mode development",
+    "build:pex": "vue-cli-service build --mode productionpex",
+    "build:ppt": "vue-cli-service build --mode productionppt",
+    "build:sit": "vue-cli-service build --mode sit",
+    "build:staging": "vue-cli-service build --mode staging",
+    "prepare": "cp-cli example.env.local .env.local",
+    "serve:build": "npm run build && serve -s dist",
+    "svgo": "svgo -f src/components/svg-icon/svgs --config=src/components/svg-icon/svgo.yml",
+    "test:e2e-gui": "vue-cli-service test:e2e --mode development"
   },
   "dependencies": {
     "axios": "^0.19.0",

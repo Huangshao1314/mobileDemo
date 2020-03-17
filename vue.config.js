@@ -1,5 +1,6 @@
 const path = require('path')
 const resolve = dir => path.join(__dirname, dir)
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 module.exports = {
   publicPath: '/',
   outputDir: 'dist',
@@ -8,6 +9,7 @@ module.exports = {
   runtimeCompiler: undefined,
   productionSourceMap: false,
   css: undefined,
+  transpileDependencies: ['vuedraggable', 'sortablejs'],
   configureWebpack: config => {
     if (process.env.NODE_ENV === 'production') {
       // 为生产环境修改配置...
@@ -18,6 +20,9 @@ module.exports = {
     }
   },
   chainWebpack: config => {
+    config.plugins.delete('prefetch')
+    config.plugins.delete('prefetch-index')
+    config.plugins.delete('preload-index')
     // 设置内联文件的大小
     config.module
       .rule('images')
@@ -44,6 +49,31 @@ module.exports = {
       .loader('svg-sprite-loader')
       .options({symbolId: 'icon-[name]'})
       .end()
+
+    /*config.when(process.env.NODE_ENV !== 'development',
+      conf => {
+        conf.optimization.splitChunks({
+          chunks: 'all',
+          cacheGroups: {
+            libs: {
+              name: 'chunk-libs',
+              test: /[\\/]node_modules[\\/]/,
+              priority: 10,
+              chunks: 'initial'
+            }
+          }
+        })
+      }
+    )
+    */
+    config.when(process.env.IS_ANALYZE,
+      conf => {
+        conf.plugin('webpack-report')
+          .use(BundleAnalyzerPlugin, [{
+            analyzerMode: 'static'
+          }])
+      }
+    )
   },
   pages: {
     index: {
@@ -73,21 +103,38 @@ module.exports = {
     https: false,
     open: false,
     proxy: {
-      // [
-      //   ['/'+process.env.VUE_APP_MC_NAME]:{
-      //     target: '<url>',
-      //     ws: true,
-      //     changeOrigin: true
-      //   }
-      // ]
-      '/api': {
-        target: '<url>',
+      ['/' + process.env.VUE_APP_BACKEND_NAME + '/']:{
+        target: [process.env.VUE_APP_PROXY1],
         ws: true,
-        changeOrigin: true
+        changeOrigin: true,
+        pathRewrite: {
+          ['^/' + process.env.VUE_APP_BACKEND_NAME]: process.env.VUE_APP_BACKEND_NAME
+        }
       },
-      '/foo': {
-        target: '<other_url>'
+      ['/' + process.env.VUE_APP_FC_NAME + '/']:{
+        target: [process.env.VUE_APP_PROXY2],
+        ws: true,
+        changeOrigin: true,
+        pathRewrite: {
+          ['^/' + process.env.VUE_APP_FC_NAME]: process.env.VUE_APP_FC_NAME
+        }
+      },
+      ['/' + process.env.VUE_APP_MC_NAME + '/']:{
+        target: [process.env.VUE_APP_PROXY3],
+        ws: true,
+        changeOrigin: true,
+        pathRewrite: {
+          ['^/' + process.env.VUE_APP_MC_NAME]: process.env.VUE_APP_MC_NAME
+        }
       }
+      // '/api': {
+      //   target: '<url>',
+      //   ws: true,
+      //   changeOrigin: true
+      // },
+      // '/foo': {
+      //   target: '<other_url>'
+      // }
     }
   },
   pluginOptions: {
