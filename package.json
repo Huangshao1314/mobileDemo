@@ -24,9 +24,11 @@
     "test:e2e-gui": "vue-cli-service test:e2e --mode development"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.8.7",
     "axios": "^0.19.0",
     "cookiejs": "^1.0.25",
     "core-js": "^2.6.5",
+    "cp-cli": "^2.0.0",
     "element-ui": "^2.12.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-loader": "^2.1.2",
@@ -36,7 +38,6 @@
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-standard": "^4.0.0",
     "js-cookie": "^2.2.0",
-    "js-cookies": "^1.0.4",
     "lint-staged": "^8.1.7",
     "lodash": "^4.17.11",
     "mockjs": "^1.0.1-beta3",
@@ -53,10 +54,12 @@
     "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.7.0",
-    "@vue/cli-plugin-eslint": "^3.7.0",
-    "@vue/cli-service": "^3.7.0",
+    "@vue/cli-plugin-babel": "~4.2.2",
+    "@vue/cli-plugin-eslint": "~4.2.2",
+    "@vue/cli-service": "~4.2.2",
     "babel-eslint": "^10.0.1",
+    "babel-plugin-istanbul": "^6.0.0",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "vue-template-compiler": "^2.5.21"

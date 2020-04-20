@@ -118,7 +118,8 @@ module.exports = {
     "no-useless-call": 0,//禁止不必要的call和apply
     "no-void": 0,//禁用void操作符
     "no-var": 0,//禁用var，用let和const代替
-    "no-warning-comments": [1, { "terms": ["todo", "fixme", "xxx"], "location": "start" }],//不能有警告备注
+    "no-warning-comments": 0,
+    // "no-warning-comments": [1, { "terms": ["todo", "fixme", "xxx"], "location": "start" }],//不能有警告备注
     "no-with": 2,//禁用with
     "array-bracket-spacing": [2, "never"],//是否允许非空数组里面有多余的空格
     "arrow-parens": 0,//箭头函数用小括号括起来

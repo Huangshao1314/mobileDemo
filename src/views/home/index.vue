@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <div>
-      <igtb-loading></igtb-loading>
     </div>
     <div>
       <count-down :count="5"></count-down>
@@ -13,7 +12,6 @@
 </template>
 <script>
 import ViewMixin from '@/mixins/view-mixins.js'
-import IgtbLoading from '@/components/igtb-loading'
 import CountDown from '@/components/count-down'
 import SvgPage from '../svg-page'
 export default {
@@ -22,7 +20,6 @@ export default {
     ViewMixin()
   ],
   components: {
-    IgtbLoading,
     CountDown,
     SvgPage
   },

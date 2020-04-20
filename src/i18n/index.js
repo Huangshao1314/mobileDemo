@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-import Cookies from 'js-cookies'
+import Cookies from 'js-cookie'
 import commonZH from './zh-CN/common'
 import commonEN from './en-US/common'
 import dictionaryZH from './zh-CN/dictionary'

@@ -138,20 +138,20 @@ var PQueue = /** @class */ (function(_super) {
   __extends(PQueue, _super);
   function PQueue(options) {
     var _this = _super.call(this) || this;
-    _this.intervalCount = 0;
-    _this.intervalEnd = 0;
+    _this._intervalCount = 0;
+    _this._intervalEnd = 0;
     _this._pendingCount = 0;
-    _this.resolveEmpty = empty;
+    _this._resolveEmpty = empty;
     _this._resolveIdle = empty;
     // eslint-disable-next-line
-    options = __assign({carryoverConcurrencyCount:false,intervalCap:Infinity,autoStart:true,queueClass:priority_queue_1.default},options);
+    options = __assign({carryoverConcurrencyCount: false, intervalCap: Infinity, interval: 0, concurrency: Infinity, autoStart: true, queueClass: priority_queue_1.default}, options);
     if (!(typeof options.intervalCap === 'number' && options.intervalCap >= 1)) {
       throw new TypeError("Expected `intervalCap` to be a number from 1 and up, got `" + options.intervalCap + "`(" + typeof options.intervalCap + ")");
     }
     if (options.interval === undefined || !(Number.isFinite(options.interval) && options.interval >= 0)) {
       throw new TypeError("Expected `interval` to be a finite number >= 0, got `" + options.interval + "`(" + typeof options.interval + ")");
     }
-    _this.carryoverConcurrencyCount = options.carryoverConcurrencyCount;
+    _this._carryoverConcurrencyCount = options.carryoverConcurrencyCount;
     _this._isIntervalIgnored = options.intervalCap === Infinity || options.interval === 0;
     _this._intervalCap = options.intervalCap;
     _this._interval = options.interval;
