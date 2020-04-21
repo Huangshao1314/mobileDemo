@@ -1,3 +1,12 @@
 {
-  "pluginsFile": "tests/e2e/plugins/index.js"
+  "pluginsFile": "tests/e2e/plugins/index.js",
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "reportDir": "tests/e2e/results",
+    "overwrite": false,
+    "html": true,
+    "json": true
+  },
+  "viewportWidth": 1024,
+  "viewportHeight": 768
 }

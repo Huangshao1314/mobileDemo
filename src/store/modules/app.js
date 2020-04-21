@@ -1,4 +1,4 @@
-import Cookie from 'cookiejs'
+import Cookie from 'js-cookie'
 const app = {
   state: {
     language: Cookie.get('language') || 'zh-CN',

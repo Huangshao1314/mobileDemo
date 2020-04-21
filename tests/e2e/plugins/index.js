@@ -15,6 +15,8 @@ module.exports = (on, config) => {
   //  watchOptions: {}
   // }))
 
+  on('task', require('@cypress/code-coverage/task'))
+
   return Object.assign({}, config, {
     fixturesFolder: 'tests/e2e/fixtures',
     integrationFolder: 'tests/e2e/specs',
