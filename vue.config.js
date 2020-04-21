@@ -50,7 +50,7 @@ module.exports = {
       .options({symbolId: 'icon-[name]'})
       .end()
 
-    /*config.when(process.env.NODE_ENV !== 'development',
+    /* config.when(process.env.NODE_ENV !== 'development',
       conf => {
         conf.optimization.splitChunks({
           chunks: 'all',
@@ -103,7 +103,7 @@ module.exports = {
     https: false,
     open: false,
     proxy: {
-      ['/' + process.env.VUE_APP_BACKEND_NAME + '/']:{
+      ['/' + process.env.VUE_APP_BACKEND_NAME + '/']: {
         target: [process.env.VUE_APP_PROXY1],
         ws: true,
         changeOrigin: true,
@@ -111,7 +111,7 @@ module.exports = {
           ['^/' + process.env.VUE_APP_BACKEND_NAME]: process.env.VUE_APP_BACKEND_NAME
         }
       },
-      ['/' + process.env.VUE_APP_FC_NAME + '/']:{
+      ['/' + process.env.VUE_APP_FC_NAME + '/']: {
         target: [process.env.VUE_APP_PROXY2],
         ws: true,
         changeOrigin: true,
@@ -119,7 +119,7 @@ module.exports = {
           ['^/' + process.env.VUE_APP_FC_NAME]: process.env.VUE_APP_FC_NAME
         }
       },
-      ['/' + process.env.VUE_APP_MC_NAME + '/']:{
+      ['/' + process.env.VUE_APP_MC_NAME + '/']: {
         target: [process.env.VUE_APP_PROXY3],
         ws: true,
         changeOrigin: true,
