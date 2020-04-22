@@ -1,0 +1,12 @@
+/* common style */
+body {
+  font-family: "Helvetica Neue"
+}
+
+/* 清除浮动影响 */
+.clearfix::after,.clearfix::ebfore {
+  content: '';
+  clear: both;
+  display: block;
+  visibility: hidden;
+}

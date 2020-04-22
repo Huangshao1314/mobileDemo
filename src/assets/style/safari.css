@@ -1,0 +1,7 @@
+/* safari兼容性样式 */
+.ele-table .cell.ele-tooltip {
+  &:before {
+    content: '';
+    display: block;
+  }
+}

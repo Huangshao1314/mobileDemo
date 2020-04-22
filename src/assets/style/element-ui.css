@@ -1,0 +1,7 @@
+/****** 全局覆盖elementUI样式 ******/
+
+/* 基础类——button按钮 */
+.ele-button {
+  padding: 8px 15px;
+  border-radius: 2px;
+}

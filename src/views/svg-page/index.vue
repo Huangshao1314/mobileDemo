@@ -55,6 +55,7 @@
 </template>
 <script>
 import ViewMixin from '@/mixins/view-mixins.js'
+import { login } from '@/service/home/login.js'
 export default {
   name: 'SvgPage',
   mixins: [
@@ -66,16 +67,7 @@ export default {
     }
   },
   mounted() {
-    this.$ele.post("login", {'name': 'test'}).then(res => {
-      if (this.$CU.isSuccess(res)) {
-        let temp = this.$CU.getResData(res)
-        console.log(temp)
-      } else {
-        this.$alert(this.getErr(res).message)
-      }
-    }).catch(err => {
-      err;
-    })
+    login({'name': 'test'})
     // 自动生成svg组件图标和库
     const mockContext = require.context('../../components/svg-icon/svgs', true, /.svg$/)
     mockContext.keys().forEach(filepath => {

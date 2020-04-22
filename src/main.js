@@ -19,6 +19,7 @@ import CU from '@/utils/common-utils'
 import webSocket from '@/utils/websocket'
 import globalBus from '@/utils/global-bus'
 import vueHttp from '@/utils/http'
+import BrowserUtils from '@/utils/browser-utils.js'
 import './error-log'
 
 Vue.use(ElementUI, {
@@ -32,6 +33,11 @@ Vue.use(vueHttp, axios)
 // 添加mock挡板数据拦截请求，模拟返回数据
 if (process.env.VUE_APP_MOCK === 'MOCK') {
   require('./mock')
+}
+
+// safari浏览器引入css
+if (BrowserUtils.isSafari) {
+  require('./assets/style/safari.css')
 }
 
 Vue.config.productionTip = false;
