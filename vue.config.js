@@ -2,14 +2,14 @@ const path = require('path')
 const resolve = dir => path.join(__dirname, dir)
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 module.exports = {
-  publicPath: '/',
-  outputDir: 'dist',
+  publicPath: '/mobileDemo',
+  outputDir: './dist',
   assetsDir: 'assets',
   lintOnSave: true,
   runtimeCompiler: undefined,
   productionSourceMap: false,
   css: undefined,
-  transpileDependencies: ['vuedraggable', 'sortablejs'],
+  transpileDependencies: ['dom7'],
   configureWebpack: config => {
     if (process.env.NODE_ENV === 'production') {
       // 为生产环境修改配置...
@@ -19,10 +19,17 @@ module.exports = {
       config.devtool = 'source-map'
     }
   },
+
+  pwa: {
+    workboxPluginMode: 'InjectManifest',
+    workboxOptions: {
+      swSrc: 'src/service-worker.js',
+      importWorkboxFrom: 'disabled'
+    },
+    themeColor: '#BE2E3E'
+  },
+
   chainWebpack: config => {
-    config.plugins.delete('prefetch')
-    config.plugins.delete('prefetch-index')
-    config.plugins.delete('preload-index')
     // 设置内联文件的大小
     config.module
       .rule('images')
