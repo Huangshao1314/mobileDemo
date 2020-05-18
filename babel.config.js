@@ -8,6 +8,6 @@ if (process.env.npm_lifecycle_event === "test:e2e-gui" || process.env.npm_lifecy
   plugins.push(['istanbul', {useInlineSourceMaps: false}])
 }
 module.exports = {
-  presets: [["@vue/cli-plugin-babel/preset", {'useBuiltIns': 'entry'}]],
+  presets: [["@vue/app", {'useBuiltIns': 'entry'}]],
   plugins: plugins
 };

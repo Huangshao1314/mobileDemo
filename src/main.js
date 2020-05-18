@@ -1,7 +1,11 @@
 import Vue from 'vue';
+import BrowserUtils from '@/utils/browser-utils.js'
+
 import '@babel/polyfill'
 // import 'core-js/stable'
 import App from './App.vue';
+
+import * as FastClick from 'fastclick'
 
 import 'normalize.css/normalize.css'
 import ElementUI from 'element-ui';
@@ -19,8 +23,24 @@ import CU from '@/utils/common-utils'
 import webSocket from '@/utils/websocket'
 import globalBus from '@/utils/global-bus'
 import vueHttp from '@/utils/http'
-import BrowserUtils from '@/utils/browser-utils.js'
 import './error-log'
+
+import './registerServiceWorker.js'
+
+let scTag = document.createElement('script')
+if (BrowserUtils.isAndroid && BrowserUtils.isInIgtbApp) {
+  scTag.setAttribute('src', process.env.BASE_URL + 'platform_android/cordova.js')
+} else if (BrowserUtils.isIOS && BrowserUtils.isInIgtbApp) {
+  scTag.setAttribute('src', process.env.BASE_URL + 'platform_ios/cordova.js')
+} else {
+  scTag.setAttribute('src', process.env.BASE_URL + 'platform_browser/cordova.js')
+}
+document.head.appendChild(scTag)
+
+// ios兼容处理
+if (/Android/.test(navigator.userAgent)) {
+  FastClick.attach(document.body)
+}
 
 Vue.use(ElementUI, {
   i18n: (key, opt) => i18n.t(key, opt)
