@@ -13,8 +13,8 @@ export const login = (params = {}) => {
       if (_this.$CU.isSuccess(res)) {
         resolve(_this.$CU.getResData(res))
       } else {
-        _this.$alert(_this.getErr(res).message)
-        reject({type: 'error', message: _this.getErr(res).message})
+        _this.$alert(_this.$CU.getErr(res).message)
+        reject({type: 'error', message: _this.$CU.getErr(res).message})
       }
     }).catch(err => {
       err;

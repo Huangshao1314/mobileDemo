@@ -12,6 +12,9 @@ import ElementUI from 'element-ui';
 import axios from 'axios'
 import 'element-ui/lib/theme-chalk/index.css';
 
+import Vant from 'vant';
+import 'vant/lib/index.css';
+
 import router from './router'
 import store from './store'
 import i18n from './i18n'
@@ -45,6 +48,7 @@ if (/Android/.test(navigator.userAgent)) {
 Vue.use(ElementUI, {
   i18n: (key, opt) => i18n.t(key, opt)
 });
+Vue.use(Vant)
 Vue.use(CU)
 Vue.use(webSocket)
 Vue.use(globalBus)

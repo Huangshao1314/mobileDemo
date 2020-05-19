@@ -2,11 +2,12 @@ export const login = [{
   path: '/login',
   method: 'login',
   data: {
-    result: {
+    "result": {
       userName: 'login',
       userId: 'test111'
     },
-    header: {
+    "_isException": false,
+    "header": {
       'language': 'zh-cn',
       'device': 'tttt'
     }

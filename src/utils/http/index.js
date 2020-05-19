@@ -1,6 +1,8 @@
 import config from './http.default.config'
 import eleConfig from './http.ele.config'
 import PQueue from '@/libs/p-queue'
+import native from './native'
+import BrowserUtils from '../browser-utils'
 /**
  * Install plugin
  * @param Vue
@@ -49,7 +51,12 @@ vueHttp.install = (Vue, axios) => {
 
     $ele: {
       get() {
+        const isMock = process.env.VUE_APP_MOCK === 'MOCK'
+        if (BrowserUtils.isInIgtbApp && !isMock) {
+          return native
+        }
         return eleInstance
+
       }
     },
 

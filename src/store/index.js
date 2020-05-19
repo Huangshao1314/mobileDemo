@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import * as Cookies from 'js-cookie'
 
+import sharedMutations from 'vuex-shared-mutations'
 import hello from './modules/hello'
 import app from './modules/app'
 
@@ -20,7 +21,8 @@ let getStorageType = function() {
   }
   return {
     getState: (key) => Cookies.getJSON(key),
-    setState: (key, state) => Cookies.set(key, state)
+    setState: (key, state) => Cookies.set(key, state),
+    paths: ['app', 'httpError', 'account', 'workbench', 'acountquery']
   }
 }
 
@@ -30,6 +32,7 @@ export default new Vuex.Store({
   plugins: [
     createPersistedState(
       getStorageType()
-    )
+    ),
+    sharedMutations({predicata: ['SET_ONLINE', 'SET_CALENDAR', 'SET_ISCOMEFROMPOPUP']})
   ]
 })

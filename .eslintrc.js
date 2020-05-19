@@ -111,7 +111,7 @@ module.exports = {
     "no-unexpected-multiline": 2,//避免多行表达式
     "no-underscore-dangle": 0,//标识符不能以_开头或结尾
     "no-unneeded-ternary": 0,//禁止不必要的嵌套 var isYes = answer === 1 ? true : false;
-    "no-unreachable": 2,//不能有无法执行的代码
+    "no-unreachable": 0,//不能有无法执行的代码
     "no-unused-expressions": 0,//禁止无用的表达式
     "no-unused-vars":0, // [2, {"vars": "all", "args": "after-used"}],//不能有声明后未被使用的变量或参数
     "no-use-before-define": 2,//未定义前不能使用

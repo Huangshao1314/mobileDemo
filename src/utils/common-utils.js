@@ -2,15 +2,15 @@ import Vue from 'vue'
 
 const Common = {}
 Common.isSuccess = (res) => {
-  return Boolean(res._exception)
+  return Boolean(res.data._isException)
 }
 Common.getResData = (res) => {
   return res.data.result
 }
 Common.getErr = (res) => {
   return {
-    message: res.message,
-    code: res.code
+    message: res.data.message,
+    code: res.data.code
   }
 }
 Object.defineProperties(Vue.prototype, {

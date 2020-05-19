@@ -16,6 +16,8 @@ BrowserUtils.isChrome = BrowserUtils.UA && /chrome\/\d+/.test(BrowserUtils.UA) &
 BrowserUtils.isFireFox = BrowserUtils.UA && BrowserUtils.UA.match(/firefox\/(\d+)/);
 BrowserUtils.isPhantomJS = BrowserUtils.UA && /phantomjs/.test(BrowserUtils.UA)
 BrowserUtils.isSafari = BrowserUtils.UA && BrowserUtils.UA.match(/safari\/([\d.]+)/) && !BrowserUtils.isChrome
+BrowserUtils.isInIgtbApp = BrowserUtils.UA && /igtb/.test(BrowserUtils.UA)
+BrowserUtils.isMobile = BrowserUtils.isAndroid || BrowserUtils.isIOS
 
 /**
  * @returns {String} 浏览器版本号
